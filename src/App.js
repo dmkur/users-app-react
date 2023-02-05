@@ -1,22 +1,18 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {userActions} from "./redux";
+import {Navigate, Route, Routes} from "react-router-dom";
+import {MainLayout} from "./layouts";
+import {LoginPage, RegisterPage, UsersPage} from "./pages";
 
 const App = () => {
-    const {users} = useSelector(state => state.userReducer)
-    const dispatch = useDispatch();
-
-    console.log(users, '1_1')
-
-    useEffect(() => {
-        dispatch(userActions.getAllUsers())
-
-    }, [])
 
     return (
-        <div>
-            App component
-        </div>
+        <Routes>
+            <Route path={''} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'/login'}/>}/>
+                <Route path={'/login'} element={<LoginPage/>}/>
+                <Route path={'/register'} element={<RegisterPage/>}/>
+                <Route path={'/users'} element={<UsersPage/>}/>
+            </Route>
+        </Routes>
     )
 };
 
