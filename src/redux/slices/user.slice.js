@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {userService} from "../../services";
+import {authService, userService} from "../../services";
 
 const initialState = {
     users: [],
     error: null
 };
 
-const getAllUsers = createAsyncThunk(
+const getAll = createAsyncThunk(
     'userSlice/getAllUsers',
     async (_, {rejectWithValue}) => {
         try {
@@ -19,13 +19,25 @@ const getAllUsers = createAsyncThunk(
     }
 );
 
+const createUser = createAsyncThunk(
+    "userSlice/createUser",
+    async ({userData}, {rejectWithValue}) => {
+        try {
+            await userService.create(userData);
+
+        } catch (e) {
+            return rejectWithValue(e.response.data);
+        }
+    }
+);
+
 const userSlice = createSlice({
     name: 'userSlice',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getAllUsers.fulfilled, (state, action) => {
+            .addCase(getAll.fulfilled, (state, action) => {
                 state.users = action.payload
             })
             .addDefaultCase((state, action) => {
@@ -40,7 +52,8 @@ const userSlice = createSlice({
 const {reducer: userReducer} = userSlice
 
 const userActions = {
-    getAllUsers
+    getAll,
+    createUser
 }
 
 export {userReducer, userActions}
