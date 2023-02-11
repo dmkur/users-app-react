@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 
 const MainLayout = () => {
     const {error} = useSelector(state => state.authReducer);
-    console.log(error, 'asas')
+
     return (
         <div>
             <Header/>

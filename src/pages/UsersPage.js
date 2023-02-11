@@ -1,9 +1,11 @@
+import {Users} from "../components";
+
 const UsersPage = () => {
-  return (
-      <div>
-        UsersPage component
-      </div>
-  )
+    return (
+        <div>
+            <Users/>
+        </div>
+    )
 };
 
 export {UsersPage};

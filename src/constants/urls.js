@@ -1,4 +1,4 @@
-const baseURL = 'https://users-1.herokuapp.com/'
+const baseURL = 'https://dev-users-app.herokuapp.com/'
 
 const urls = {
     users:'users',
