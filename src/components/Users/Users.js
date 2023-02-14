@@ -6,7 +6,7 @@ import {userActions} from "../../redux";
 const Users = () => {
     const {users} = useSelector(state => state.userReducer);
     const dispatch = useDispatch();
-    console.log(users)
+
 
     useEffect(() => {
         dispatch(userActions.getAll())

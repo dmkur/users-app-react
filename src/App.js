@@ -1,6 +1,6 @@
 import {Navigate, Route, Routes} from "react-router-dom";
 import {MainLayout} from "./layouts";
-import {LoginPage, RegisterPage, UsersPage} from "./pages";
+import {CarsPage, LoginPage, RegisterPage, UsersPage} from "./pages";
 
 const App = () => {
 
@@ -11,6 +11,7 @@ const App = () => {
                 <Route path={'/login'} element={<LoginPage/>}/>
                 <Route path={'/register'} element={<RegisterPage/>}/>
                 <Route path={'/users'} element={<UsersPage/>}/>
+                <Route path={'/cars'} element={<CarsPage/>}/>
             </Route>
         </Routes>
     )

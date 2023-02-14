@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {authService, userService} from "../../services";
+import {userService} from "../../services";
 
 const initialState = {
     users: [],

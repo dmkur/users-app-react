@@ -13,7 +13,7 @@ const LoginForm = () => {
         console.log(userData)
         const { error } = dispatch(authActions.login({ userData }));
         if (!error) {
-            navigate("/users");
+            navigate("/cars");
         }
         reset();
     };
