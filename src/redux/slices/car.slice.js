@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {carService} from "../../services";
 
 const initialState = {
-    cars: {},
+    cars: [],
     error: null
 }
 
