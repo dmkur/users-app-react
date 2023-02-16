@@ -29,20 +29,20 @@ axiosService.interceptors.response.use(
     const refreshToken = authService.getRefreshToken();
 
     if (
-      error.response?.status === 400 &&
+      error.response?.status === 401 &&
       error.config &&
       !isRefreshing &&
       refreshToken
     ) {
       isRefreshing = true;
       try {
-        const { data } = await authService.getRefreshToken();
+        const { data } = await authService.refresh(refreshToken);
 
         authService.setTokens(data);
       } catch (e) {
         authService.deleteTokens();
 
-        return history.replace("/login?expireToken=true");
+        return history.replace("/login");
       }
       isRefreshing = false;
       return axiosService(error.config);
