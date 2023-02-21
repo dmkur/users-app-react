@@ -42,7 +42,7 @@ axiosService.interceptors.response.use(
       } catch (e) {
         authService.deleteTokens();
 
-        return history.replace("/login");
+        return (window.location = "/login?ExpireSesion=true");
       }
       isRefreshing = false;
       return axiosService(error.config);
