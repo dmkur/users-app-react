@@ -1,0 +1,8 @@
+.form_div {
+  display: block;
+  margin: 5px 0;
+}
+
+.form_input {
+  max-width: 150px;
+}

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { carActions } from "../../redux";
 import { Car } from "../Car/Car";
+import { CarForm } from "../CarForm/CarForm";
 
 const Cars = () => {
   const { cars } = useSelector((state) => state.carReducer);
@@ -18,7 +19,10 @@ const Cars = () => {
   }
 
   return (
-    <div>{cars && cars.map((car) => <Car car={car} key={car._id} />)}</div>
+    <div>
+      <CarForm />
+      <div>{cars && cars.map((car) => <Car car={car} key={car._id} />)}</div>
+    </div>
   );
 };
 
