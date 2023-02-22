@@ -1,4 +1,4 @@
-import "./CarForm.style.css"
+import "./CarForm.style.css";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const CarForm = () => {
   };
 
   return (
-    <div className="form_wrapper">
+    <div className="form_wrapper cars_form">
       <form onSubmit={handleSubmit(submit)}>
         <div className="form_div">
           <label className="form_label">Model: </label>
@@ -36,7 +36,7 @@ const CarForm = () => {
         </div>
 
         <div style={{ marginTop: "10px" }}>
-          <button type={"submit"}>Submit</button>
+          <button type={"submit"}>Create</button>
         </div>
       </form>
     </div>
