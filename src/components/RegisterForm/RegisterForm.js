@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { userActions } from "../../redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const RegisterForm = () => {
   const { handleSubmit, register, reset } = useForm();
@@ -18,7 +19,7 @@ const RegisterForm = () => {
 
   return (
     <div className="form_wrapper">
-      <form onSubmit={handleSubmit(submit)} style={{ textAlign: "center" }}>
+      <form onSubmit={handleSubmit(submit)}>
         <div className="form_div">
           <label className="form_label">Name: </label>
         </div>
@@ -43,7 +44,7 @@ const RegisterForm = () => {
           className="form_input"
         />
 
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ marginTop: "20px" }}>
           <button type={"submit"}>Submit</button>
         </div>
       </form>

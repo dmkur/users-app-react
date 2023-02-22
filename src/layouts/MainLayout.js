@@ -6,7 +6,7 @@ const MainLayout = () => {
     const {error} = useSelector(state => state.authReducer);
 
     return (
-        <div>
+        <div className="mainLayout_wrapper">
             <Header/>
             {error && <div style={{color:'red'}}>{error.message}</div>}
             <Outlet/>

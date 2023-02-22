@@ -1,27 +1,25 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {carActions} from "../../redux";
-import {Car} from "../Car/Car";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { carActions } from "../../redux";
+import { Car } from "../Car/Car";
 
 const Cars = () => {
-    const {cars} = useSelector(state => state.carReducer);
-    console.log(cars)
+  const { cars } = useSelector((state) => state.carReducer);
+  console.log(cars, "CARES");
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(carActions.getAll())
-    }, [])
+  useEffect(() => {
+    dispatch(carActions.getAll());
+  }, []);
 
-    if(!cars) {
-        return <h2>Loading...</h2>
-    }
+  if (!cars) {
+    return <h2>Loading...</h2>;
+  }
 
-    return (
-        <div>
-            {cars && cars.map(car => <Car car={car} key={car._id}/>)}
-        </div>
-    )
+  return (
+    <div>{cars && cars.map((car) => <Car car={car} key={car._id} />)}</div>
+  );
 };
 
-export {Cars};
+export { Cars };
