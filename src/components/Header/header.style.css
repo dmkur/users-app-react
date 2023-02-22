@@ -17,30 +17,9 @@
   display: inline-flex;
   gap: 20px;
 }
-button {
-  background-color: #fff;
-  border: 1px solid #d5d9d9;
-  border-radius: 8px;
-  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
 
 
-  color: #0f1111;
-  cursor: pointer;
-
-  line-height: 25px;
-  padding: 0 10px 0 11px;
-
-  text-align: center;
-
-  user-select: none;
-
-  touch-action: manipulation;
-  vertical-align: middle;
-  width: 90px;
-  transition: all ease 0.4s;
-}
-
-button:hover {
+.headerWrapper button:hover {
   background-color: rgba(220, 239, 228, 0.09);
   color: #fff;
 }
