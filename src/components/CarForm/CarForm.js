@@ -1,20 +1,31 @@
 import "./CarForm.style.css";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authActions } from "../../redux";
+
+import { useEffect } from "react";
+import { carActions } from "../../redux";
 
 const CarForm = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, setValue } = useForm();
+  const { carForUpdate } = useSelector((state) => state.carReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const submit = async (userData) => {
-    // const { error } = await dispatch(authActions.login({ userData }));
-    // if (!error) {
-    //   navigate("/cars");
-    // }
-    // reset();
+  useEffect(() => {
+    if (carForUpdate) {
+      setValue("model", carForUpdate.model);
+      setValue("price", carForUpdate.price);
+      setValue("year", carForUpdate.year);
+    }
+  }, [carForUpdate]);
+
+  const submit = async (carData) => {
+    console.log(carData);
+    if (carForUpdate) {
+      dispatch(carActions.updateCar({ carId: carData._id }));
+    }
+    reset();
   };
 
   return (
