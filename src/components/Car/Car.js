@@ -3,6 +3,7 @@ import { carActions } from "../../redux";
 
 const Car = ({ car }) => {
   const { model, year, price } = car;
+
   const dispatch = useDispatch();
 
   return (
