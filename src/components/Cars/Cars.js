@@ -5,8 +5,8 @@ import { Car } from "../Car/Car";
 import { CarForm } from "../CarForm/CarForm";
 
 const Cars = () => {
-  const { cars } = useSelector((state) => state.carReducer);
-  console.log(cars, "CARES");
+  const { cars, carForUpdate } = useSelector((state) => state.carReducer);
+  console.log(carForUpdate, "_________");
 
   const dispatch = useDispatch();
 

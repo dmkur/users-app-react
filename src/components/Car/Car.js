@@ -1,14 +1,21 @@
-const Car = ({car}) => {
-    const {model, year, price} = car
+import { useDispatch } from "react-redux";
+import { carActions } from "../../redux";
 
-    return (
-        <div>
-            <h4>Model: {model}</h4>
-            <div>Price: {price}</div>
-            <div>Year: {year}</div>
-            <hr/>
-        </div>
-    )
+const Car = ({ car }) => {
+  const { model, year, price } = car;
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <h4>Model: {model}</h4>
+      <div>Price: {price}</div>
+      <div>Year: {year}</div>
+      <button onClick={() => dispatch(carActions.setCarForUpdate(car))}>
+        Edit
+      </button>
+      <hr />
+    </div>
+  );
 };
 
-export {Car};
+export { Car };
