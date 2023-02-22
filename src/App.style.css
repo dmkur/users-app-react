@@ -16,6 +16,10 @@ h6 {
   margin: 0;
 }
 
+.mainLayout_wrapper {
+  padding: 0 30px;
+}
+
 button {
   background-color: #fff;
   border: 1px solid #d5d9d9;
@@ -33,6 +37,10 @@ button {
   width: 70px;
   transition: all ease 0.4s;
 }
+button:hover {
+  background-color: cadetblue;
+  color: #fff;
+}
 
 .form_wrapper {
   max-width: 500px;
@@ -49,7 +57,6 @@ button {
   align-items: center;
 
   margin: 15px 0;
-  position: relative;
 }
 
 .form_input {
@@ -58,7 +65,7 @@ button {
 
   width: 250px;
   border: none;
-  border-bottom: 1px solid #757575;
+  border-bottom: 1px solid #999;
   transition: 0.2s ease all;
 }
 
@@ -72,4 +79,5 @@ button {
 }
 .form_input:focus {
   outline: none;
+  border-bottom: 1px solid cadetblue;
 }
