@@ -1,0 +1,15 @@
+.cars_form div {
+  margin: 5px 0;
+}
+
+.cars_form form {
+  display: inline-flex;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cars_form input {
+  max-width: 150px;
+}
