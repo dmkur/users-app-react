@@ -14,6 +14,11 @@ const Car = ({ car }) => {
       <button onClick={() => dispatch(carActions.setCarForUpdate(car))}>
         Edit
       </button>
+      <button
+        onClick={() => dispatch(carActions.deleteCarById({ carId: car._id }))}
+      >
+        Delete
+      </button>
       <hr />
     </div>
   );
