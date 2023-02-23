@@ -44,6 +44,18 @@ const updateCarById = createAsyncThunk(
   }
 );
 
+const deleteCarById = createAsyncThunk(
+  "carSlice/deleteCarById",
+  async ({ carId }, { rejectWithValue }) => {
+    try {
+      await carService.deleteCarById(carId);
+      return carId;
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
+  }
+);
+
 const carSlice = createSlice({
   name: "carSlice",
   initialState,
@@ -59,6 +71,10 @@ const carSlice = createSlice({
       })
       .addCase(create.fulfilled, (state, action) => {
         state.cars.push(action.payload);
+      })
+      .addCase(deleteCarById.fulfilled, (state, action) => {
+        const index = state.cars.findIndex((i) => i._id === action.payload);
+        state.cars.splice(index, 1);
       })
       .addCase(updateCarById.fulfilled, (state, action) => {
         const index = state.cars.findIndex((i) => i._id === action.payload);
@@ -84,6 +100,7 @@ const carActions = {
   setCarForUpdate,
   create,
   updateCarById,
+  deleteCarById,
 };
 
 export { carReducer, carActions };
