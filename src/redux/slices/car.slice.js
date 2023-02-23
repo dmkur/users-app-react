@@ -5,6 +5,7 @@ const initialState = {
   cars: [],
   error: null,
   carForUpdate: null,
+  isLoading: false
 };
 
 const getAll = createAsyncThunk(
@@ -67,6 +68,7 @@ const carSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAll.fulfilled, (state, action) => {
+        state.isLoading = true
         state.cars = action.payload;
       })
       .addCase(create.fulfilled, (state, action) => {
