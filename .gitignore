@@ -30,3 +30,4 @@ yarn-error.log*
 /.idea/users-app-react.iml
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/.gitignore
+/.idea/
