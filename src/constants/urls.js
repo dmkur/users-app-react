@@ -1,4 +1,4 @@
-const baseURL = "https://dev-users-app.herokuapp.com/";
+const baseURL = "http://localhost:5000/";
 
 const urls = {
   users: "users",
