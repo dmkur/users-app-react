@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { userActions } from "../../redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const RegisterForm = () => {
   const { handleSubmit, register, reset } = useForm();
@@ -43,6 +42,11 @@ const RegisterForm = () => {
           {...register("password")}
           className="form_input"
         />
+        <div>
+          <span style={{ fontSize: "13px" }}>
+            Already with us? <Link to={"/login"}>Log in</Link>
+          </span>
+        </div>
 
         <div style={{ marginTop: "20px" }}>
           <button type={"submit"}>Submit</button>

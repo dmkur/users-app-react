@@ -5,7 +5,8 @@ const initialState = {
   cars: [],
   error: null,
   carForUpdate: null,
-  isLoading: false
+  isLoading: false,
+  carById: [],
 };
 
 const getAll = createAsyncThunk(
@@ -14,6 +15,30 @@ const getAll = createAsyncThunk(
     try {
       const { data } = await carService.getAllCars();
 
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
+  }
+);
+const getCarById = createAsyncThunk(
+  "carSlice/getCarById",
+  async ({ carId }, { rejectWithValue }) => {
+    try {
+      const { data } = await carService.getCarById(carId);
+
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
+  }
+);
+const getCarByParams = createAsyncThunk(
+  "carSlice/getCarByParams",
+  async ({ params }, { rejectWithValue }) => {
+    try {
+      const { data } = await carService.getCarByParams(params);
+      console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.response.data);
@@ -68,8 +93,21 @@ const carSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAll.fulfilled, (state, action) => {
-        state.isLoading = true
+        state.isLoading = true;
         state.cars = action.payload;
+      })
+      .addCase(getCarById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const arr = [];
+        if (Array.isArray(action.payload)) {
+          state.carById = action.payload;
+        } else {
+          arr.push(action.payload);
+          state.carById = arr;
+        }
+      })
+      .addCase(getCarById.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(create.fulfilled, (state, action) => {
         state.cars.push(action.payload);
@@ -103,6 +141,8 @@ const carActions = {
   create,
   updateCarById,
   deleteCarById,
+  getCarById,
+  getCarByParams,
 };
 
 export { carReducer, carActions };

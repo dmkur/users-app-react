@@ -22,6 +22,7 @@ const Header = () => {
     <div className="headerWrapper">
       <div>Header</div>
       <div className="headerBTN">
+        <button onClick={() => navigate("cars")}>Cars</button>
         <button onClick={() => isLogin()}>
           {!isAuth ? "Sign in" : "Sign out"}
         </button>
