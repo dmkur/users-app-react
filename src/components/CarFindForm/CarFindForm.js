@@ -18,6 +18,10 @@ const CarFindForm = () => {
     dispatch(carActions.getCarByParams({ params: obj }));
     reset();
   };
+  const res = () => {
+    setQuery("");
+    dispatch(carActions.getAll());
+  };
 
   return (
     <Fragment>
@@ -43,7 +47,7 @@ const CarFindForm = () => {
         </div>
       </form>
       <div>
-        <button onClick={() => dispatch(carActions.getAll())}>Res</button>
+        <button onClick={res}>Res</button>
       </div>
     </Fragment>
   );
