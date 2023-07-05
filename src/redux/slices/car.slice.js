@@ -38,7 +38,7 @@ const getCarByParams = createAsyncThunk(
   async ({ params }, { rejectWithValue }) => {
     try {
       const { data } = await carService.getCarByParams(params);
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.response.data);
@@ -94,6 +94,9 @@ const carSlice = createSlice({
     builder
       .addCase(getAll.fulfilled, (state, action) => {
         state.isLoading = true;
+        state.cars = action.payload;
+      })
+      .addCase(getCarByParams.fulfilled, (state, action) => {
         state.cars = action.payload;
       })
       .addCase(getCarById.fulfilled, (state, action) => {

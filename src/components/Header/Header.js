@@ -7,7 +7,6 @@ const Header = () => {
   const navigate = useNavigate();
   const { isAuth } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
-  console.log(isAuth);
 
   const isLogin = () => {
     if (!isAuth) {

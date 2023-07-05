@@ -1,15 +1,22 @@
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { carActions } from "../../redux";
 
 const CarFindForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
+  const [query, setQuery] = useSearchParams();
 
   const submit = (obj) => {
-    console.log(obj);
-    // dispatch(carActions.getCarByParams({params:obj}))
+    for (let key in obj) {
+      if (obj[key] === "") delete obj[key];
+    }
+
+    setQuery(obj);
+    dispatch(carActions.getCarByParams({ params: obj }));
+    reset();
   };
 
   return (
@@ -35,6 +42,9 @@ const CarFindForm = () => {
           <button type={"submit"}>Find</button>
         </div>
       </form>
+      <div>
+        <button onClick={() => dispatch(carActions.getAll())}>Res</button>
+      </div>
     </Fragment>
   );
 };
