@@ -1,22 +1,34 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {User} from "../User/User";
-import {userActions} from "../../redux";
+import { useEffect, useState } from "react";
+
+import { User } from "../User/User";
+
+import { userService } from "../../services";
 
 const Users = () => {
-    const {users} = useSelector(state => state.userReducer);
-    const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    fetch();
+  }, []);
 
-    useEffect(() => {
-        dispatch(userActions.getAll())
-    }, [])
+  async function fetch() {
+    setLoading(true);
+    await userService.getAll().then(({ data }) => {
+      setUsers([...data]);
+      setLoading(false);
+    });
+  }
 
-    return (
-        <div>
-            {users && users.map(user => <User user={user} key={user._id}/>)}
-        </div>
-    )
+  return (
+    <div>
+      {loading ? (
+        <h3>"Loading..."</h3>
+      ) : (
+        users && users.map((user) => <User user={user} key={user._id} />)
+      )}
+    </div>
+  );
 };
 
-export {Users};
+export { Users };

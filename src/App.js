@@ -1,4 +1,4 @@
-import "./App.style.css";
+// import "./App.style.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { MainLayout } from "./layouts";
 import { CarsPage, LoginPage, RegisterPage, UsersPage } from "./pages";
