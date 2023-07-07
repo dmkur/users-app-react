@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-
 import { User } from "../User/User";
-
 import { userService } from "../../services";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  console.log(users,'1');
 
-  useEffect(() => {
-    fetch();
+  useEffect(() => {    
+      fetch();    
   }, []);
 
   async function fetch() {
-    setLoading(true);
     await userService.getAll().then(({ data }) => {
       setUsers([...data]);
       setLoading(false);

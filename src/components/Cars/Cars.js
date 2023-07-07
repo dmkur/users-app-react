@@ -1,33 +1,38 @@
-import { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { carActions } from "../../redux";
+import { carService } from "../../services";
 import { Car } from "../Car/Car";
 import { CarFindForm } from "../CarFindForm/CarFindForm";
 
 const Cars = () => {
-  const { cars, isLoading } = useSelector((state) => state.carReducer);
-  const dispatch = useDispatch();
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(carActions.getAll());
+    getCars();
   }, []);
-
-  if (!isLoading) {
-    return <h2>Loading...</h2>;
-  }
+  const getCars = async () => {
+    setLoading(true);
+    const { data } = await carService.getAllCars();
+    setCars(data);
+    setLoading(false);
+  };
 
   return (
     <Fragment>
       <div>
         <CarFindForm />
       </div>
-      {cars &&
+      {loading ? (
+        <h3>Loading...</h3>
+      ) : (
+        cars &&
         cars.map((car) => (
           <Link to={`/cars/${car._id}`} key={car._id}>
             <Car car={car} />
           </Link>
-        ))}
+        ))
+      )}
     </Fragment>
   );
 };

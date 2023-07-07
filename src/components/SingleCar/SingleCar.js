@@ -1,29 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { carActions } from "../../redux";
+import { carService } from "../../services";
 import { Car } from "../Car/Car";
 import { User } from "../User/User";
 
 const SingleCar = () => {
-  const { isLoading, carById } = useSelector((state) => state.carReducer);
+  const [car, setCar] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // const { isLoading, carById } = useSelector((state) => state.carReducer);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { carId } = useParams();
-  console.log(carById);
 
   useEffect(() => {
-    dispatch(carActions.getCarById({ carId }));
+    // dispatch(carActions.getCarById({ carId }));
+    getCar();
   }, [carId]);
 
-  if (isLoading) {
+  const getCar = async () => {
+    const arr = [];
+    setLoading(true);
+    const { data } = await carService.getCarById(carId);
+    arr.push({ ...data });
+    setCar(arr);
+
+    setLoading(false);
+  };
+
+  if (loading) {
     return <h3>Loading...</h3>;
   }
 
   return (
     <div>
       {" "}
-      {carById.map((car) => (
+      {car.map((car) => (
         <div key={car._id}>
           <User user={car.user} />
           <Car car={car} key={car.id} />
