@@ -3,10 +3,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { carActions } from "../../redux";
-import Select from "react-select";
 
 const CarFindForm = ({ cars }) => {
-  console.log(cars, "carsssssssssss");
+
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const [query, setQuery] = useSearchParams();
@@ -24,15 +23,8 @@ const CarFindForm = ({ cars }) => {
     dispatch(carActions.getAll());
   };
 
-  const options = [
-    { value: cars.model, label: cars.model },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
   return (
     <Fragment>
-      <Select options={cars.model} />
       <form onSubmit={handleSubmit(submit)}>
         <div>CarFindForm</div>
         <div>

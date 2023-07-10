@@ -1,17 +1,17 @@
-import {Outlet} from "react-router-dom";
-import {Header} from "../components";
-import {useSelector} from "react-redux";
+import { Outlet } from "react-router-dom";
+import { Header } from "../components";
+import { useSelector } from "react-redux";
 
 const MainLayout = () => {
-    const {error} = useSelector(state => state.authReducer);
+  const { error } = useSelector((state) => state.authReducer);
 
-    return (
-        <div className="mainLayout_wrapper">
-            <Header/>
-            {error && <div style={{color:'red'}}>{error.message}</div>}
-            <Outlet/>
-        </div>
-    )
+  return (
+    <div>
+      <Header />
+      {error && <div>{error.message}</div>}
+      <Outlet />
+    </div>
+  );
 };
 
-export {MainLayout};
+export { MainLayout };
