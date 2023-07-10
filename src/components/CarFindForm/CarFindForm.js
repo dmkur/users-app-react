@@ -1,20 +1,27 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { carActions } from "../../redux";
 
 const CarFindForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { setCarForQuery } = useSelector((state) => state.carReducer);
+  const { register, handleSubmit, reset, setValue } = useForm();
   const dispatch = useDispatch();
   const [query, setQuery] = useSearchParams();
 
+  useEffect(() => {
+    if (setCarForQuery) {
+      setValue("model", setCarForQuery.model);
+      setValue("year", setCarForQuery.year);
+      setValue("price", setCarForQuery.price);
+    }
+  }, []);
+
   const submit = (obj) => {
-   
     for (let key in obj) {
       if (obj[key] === "") delete obj[key];
     }
-    
     setQuery(obj);
     dispatch(carActions.setCarForQuery(obj));
   };
@@ -22,6 +29,7 @@ const CarFindForm = () => {
   const res = () => {
     setQuery("");
     dispatch(carActions.setCarForQuery());
+    reset();
   };
 
   return (
