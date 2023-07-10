@@ -5,34 +5,10 @@ const initialState = {
   cars: [],
   error: null,
   carForUpdate: null,
+  setCarForQuery: null,
   isLoading: false,
-  carById: [],
 };
 
-const getAll = createAsyncThunk(
-  "carSlice/getAll",
-  async (_, { rejectWithValue }) => {
-    try {
-      const { data } = await carService.getAllCars();
-
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.response.data);
-    }
-  }
-);
-const getCarById = createAsyncThunk(
-  "carSlice/getCarById",
-  async ({ carId }, { rejectWithValue }) => {
-    try {
-      const { data } = await carService.getCarById(carId);
-
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.response.data);
-    }
-  }
-);
 const getCarByParams = createAsyncThunk(
   "carSlice/getCarByParams",
   async ({ params }, { rejectWithValue }) => {
@@ -89,29 +65,13 @@ const carSlice = createSlice({
     setCarForUpdate: (state, action) => {
       state.carForUpdate = action.payload;
     },
+    setCarForQuery: (state, action) => {
+      state.setCarForQuery = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAll.fulfilled, (state, action) => {
-        state.isLoading = true;
-        state.cars = action.payload;
-      })
-      .addCase(getCarByParams.fulfilled, (state, action) => {
-        state.cars = action.payload;
-      })
-      .addCase(getCarById.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const arr = [];
-        if (Array.isArray(action.payload)) {
-          state.carById = action.payload;
-        } else {
-          arr.push(action.payload);
-          state.carById = arr;
-        }
-      })
-      .addCase(getCarById.pending, (state) => {
-        state.isLoading = true;
-      })
+
       .addCase(create.fulfilled, (state, action) => {
         state.cars.push(action.payload);
       })
@@ -135,16 +95,15 @@ const carSlice = createSlice({
 
 const {
   reducer: carReducer,
-  actions: { setCarForUpdate },
+  actions: { setCarForUpdate, setCarForQuery },
 } = carSlice;
 
 const carActions = {
-  getAll,
   setCarForUpdate,
+  setCarForQuery,
   create,
   updateCarById,
   deleteCarById,
-  getCarById,
   getCarByParams,
 };
 

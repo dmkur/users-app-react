@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { useParams } from "react-router-dom";
-import { carActions } from "../../redux";
+
 import { carService } from "../../services";
 import { Car } from "../Car/Car";
 import { User } from "../User/User";
@@ -9,13 +9,10 @@ import { User } from "../User/User";
 const SingleCar = () => {
   const [car, setCar] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const { isLoading, carById } = useSelector((state) => state.carReducer);
 
-  // const dispatch = useDispatch();
   const { carId } = useParams();
 
   useEffect(() => {
-    // dispatch(carActions.getCarById({ carId }));
     getCar();
   }, [carId]);
 
