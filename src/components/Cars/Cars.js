@@ -21,7 +21,7 @@ const Cars = () => {
   return (
     <Fragment>
       <div>
-        <CarFindForm />
+        <CarFindForm cars={cars} />
       </div>
       {loading ? (
         <h3>Loading...</h3>
